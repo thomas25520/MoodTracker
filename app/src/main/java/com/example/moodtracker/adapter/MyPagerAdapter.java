@@ -29,16 +29,15 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                return FragmentMood.newInstance("smiley_super_happy", R.drawable.smiley_super_happy);
+                return FragmentMood.newInstance(R.drawable.smiley_super_happy, R.color.banana_yellow);
             case 1:
-                return FragmentMood.newInstance("smiley_happy", R.drawable.smiley_happy);
+                return FragmentMood.newInstance(R.drawable.smiley_happy, R.color.light_sage);
             case 2:
-                return FragmentMood.newInstance("smiley_normal", R.drawable.smiley_normal);
+                return FragmentMood.newInstance(R.drawable.smiley_normal, R.color.cornflower_blue_65);
             case 3:
-                return FragmentMood.newInstance("smiley_disappointed", R.drawable.smiley_disappointed);
+                return FragmentMood.newInstance(R.drawable.smiley_disappointed, R.color.warm_grey);
             case 4:
-                return FragmentMood.newInstance("smiley_sad", R.drawable.smiley_sad);
-
+                return FragmentMood.newInstance(R.drawable.smiley_sad, R.color.faded_red);
             default:
                 return null;
         }

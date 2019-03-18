@@ -2,13 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_sage"
-    android:orientation="vertical"
     tools:context=".controller.MainActivity">
 
     <ImageView
+        android:contentDescription="@string/mood_image"
         android:id="@+id/fragment_mood_smiley_happy"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -23,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:contentDescription="@string/add_mood_button"
         android:id="@+id/fragment_mood_add_mood_button"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -34,6 +36,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
+        android:contentDescription="@string/history_button"
         android:id="@+id/fragment_mood_history_button"
         android:layout_width="80dp"
         android:layout_height="80dp"
