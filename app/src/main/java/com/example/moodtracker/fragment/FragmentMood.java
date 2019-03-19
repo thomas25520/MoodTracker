@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.moodtracker.R;
@@ -41,7 +42,7 @@ public class FragmentMood extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.mood_view, container, false);
         ImageView imageView = view.findViewById(R.id.fragment_mood_smiley_happy);
         imageView.setImageResource(mImage);
@@ -50,14 +51,15 @@ public class FragmentMood extends Fragment {
 
         mAddMoodBtn = view.findViewById(R.id.fragment_mood_add_mood_button);
         mHistoryBtn = view.findViewById(R.id.fragment_mood_history_button);
-
         mAddMoodBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final EditText input = new EditText(getContext());
 //                Log.i("AddMoodBtn", "AddMoodBtn");
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext()); // AlertDialog.Builder(this), "this" not work, AlertDialog.Builder would like "context", use v.getContext()
                 // set title
                 alertDialogBuilder.setTitle("Commentaire :")
+                        .setView(input) // Line where user can enter his comment
                         .setCancelable(true)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
