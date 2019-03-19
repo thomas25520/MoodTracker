@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         ViewPager vpPager = findViewById(R.id.vpPager);
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
-        vpPager.setCurrentItem(1);
+        vpPager.setCurrentItem(3); // Start fragment at (x) position
     }
 }
