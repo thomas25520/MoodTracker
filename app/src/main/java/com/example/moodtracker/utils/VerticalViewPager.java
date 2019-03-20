@@ -1,4 +1,4 @@
-package com.example.moodtracker.adapter;
+package com.example.moodtracker.utils;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

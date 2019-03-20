@@ -1,11 +1,11 @@
-package com.example.moodtracker.adapter;
+package com.example.moodtracker.controller.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.moodtracker.R;
-import com.example.moodtracker.fragment.FragmentMood;
+import com.example.moodtracker.controller.fragment.FragmentMood;
 
 /**
  * Created by Dutru Thomas on 13/03/2019.

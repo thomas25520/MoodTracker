@@ -1,11 +1,11 @@
-package com.example.moodtracker.controller;
+package com.example.moodtracker.controller.activities;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.moodtracker.R;
-import com.example.moodtracker.adapter.MyPagerAdapter;
+import com.example.moodtracker.controller.adapter.MyPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
