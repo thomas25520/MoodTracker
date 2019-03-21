@@ -1,7 +1,6 @@
 package com.example.moodtracker.controller.fragment;
 
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,6 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.moodtracker.R;
+import com.example.moodtracker.utils.SharedPreferencesManager;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Dutru Thomas on 12/03/2019.
@@ -24,10 +27,11 @@ public class FragmentMood extends Fragment {
 
     private ImageView mAddMoodBtn;
     private ImageView mHistoryBtn;
-    private SharedPreferences mPreferences;
 
-    private String mUserMoodComment;
-    private String keyComments = "comment";
+    public static final String USER_COMMENT = "usercomment";
+    public static final String DATE_OF_COMMENT = "commentDate";
+    private String mUserComment;
+    private String mStringDate;
 
     public static FragmentMood newInstance(int resImage, int backgroundColor) { // modify for backgroundcolor
         FragmentMood fragment = new FragmentMood();
@@ -36,6 +40,36 @@ public class FragmentMood extends Fragment {
         args.putInt("backgroundColor", backgroundColor); // add background color
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void SaveUserCommentAndDate() {
+        mAddMoodBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText input = new EditText(getContext());
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext()); // AlertDialog.Builder(this), "this" not work, AlertDialog.Builder would like "context", use v.getContext()
+                alertDialogBuilder.setTitle("Commentaire :")
+                        .setView(input) // line where user can enter his comment
+                        .setCancelable(true)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // get and save user comment in AlertDialog
+                                mUserComment = input.getText().toString();
+                                SharedPreferencesManager.putString(getContext(), USER_COMMENT, mUserComment);
+                                // get and save date and time in string format
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+                                mStringDate = sdf.format(new Date());
+                                SharedPreferencesManager.putString(getContext(), DATE_OF_COMMENT, mStringDate);
+//                              finish(); // finish close an activity, useless here isn't activity
+                            }
+                        });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                // show it
+                alertDialog.show();
+            }
+        });
     }
 
     @Override
@@ -56,28 +90,9 @@ public class FragmentMood extends Fragment {
 
         mAddMoodBtn = view.findViewById(R.id.fragment_mood_add_mood_button);
         mHistoryBtn = view.findViewById(R.id.fragment_mood_history_button);
-        mAddMoodBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final EditText input = new EditText(getContext());
-//                Log.i("AddMoodBtn", "AddMoodBtn"); // log for testing if AddMoodBtn work
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext()); // AlertDialog.Builder(this), "this" not work, AlertDialog.Builder would like "context", use v.getContext()
-                alertDialogBuilder.setTitle("Commentaire :")
-                        .setView(input) // line where user can enter his comment
-                        .setCancelable(true)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // if this button is clicked, close current activity
-                                // finish(); // finish close an activity, useless here isn't activity
-                            }
-                        });
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                // show it
-                alertDialog.show();
-            }
-        });
+
+        SaveUserCommentAndDate();
+
         mHistoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
