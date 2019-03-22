@@ -1,6 +1,7 @@
 package com.example.moodtracker.controller.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.moodtracker.R;
+import com.example.moodtracker.controller.activities.HistoryActivity;
 import com.example.moodtracker.utils.SharedPreferencesManager;
 
 import java.text.SimpleDateFormat;
@@ -97,8 +99,10 @@ public class FragmentMood extends Fragment {
             @Override
             public void onClick(View v) {
 //                Log.i("HistoryBtn", "HistoryBtn"); // log for testing if HistoryBtn work
+                startActivity(new Intent(FragmentMood.this.getActivity(), HistoryActivity.class));
             }
         });
         return view;
     }
+
 }
