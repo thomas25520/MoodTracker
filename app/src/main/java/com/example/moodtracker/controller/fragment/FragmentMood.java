@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.moodtracker.R;
 import com.example.moodtracker.controller.activities.HistoryActivity;
@@ -79,20 +80,18 @@ public class FragmentMood extends Fragment {
                 final EditText input = new EditText(getContext());
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext()); // AlertDialog.Builder(this), "this" not work, AlertDialog.Builder would like "context", use v.getContext()
                 alertDialogBuilder.setTitle("Commentaire :")
-                        .setView(input) // line where user can enter his feedback
+                        .setView(input) // Here, user can enter his feedback
                         .setCancelable(true)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String feedBack = input.getText().toString(); // get and save user feedback in AlertDialog
-                                Date date = Calendar.getInstance().getTime();
+                                String feedBack = input.getText().toString(); // Get user feedback in AlertDialog
+                                Date date = Calendar.getInstance().getTime(); // Get user feedback date
                                 mUserMood = new Mood(feedBack, date, mBackgroundColor);
-
-                                // Save user mood of the day in shared preferences.
                                 // SharedPreferencesManager.putString(getContext(), USER_MOOD_OF_THE_DAY, mUserMood.formatToJsonString());
-                                SharedPreferencesManager.putMood(getContext(), USER_MOOD_OF_THE_DAY, mUserMood);
-
+                                SharedPreferencesManager.putMood(getContext(), USER_MOOD_OF_THE_DAY, mUserMood); // Save user mood of the day in shared preferences.
                                 Mood nouveau = SharedPreferencesManager.getMood(getContext(), USER_MOOD_OF_THE_DAY);
+                                Toast.makeText(getActivity(), "Humeur enregistrée", Toast.LENGTH_SHORT).show(); // Toast confirm Mood has been saved
                             }
                         });
                 // create alert dialog

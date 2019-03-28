@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int i) {
                 mMood = i;
-                System.out.println("onPageSelected " + i);
             }
 
             @Override
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Get switch(position)  in MyPagerAdapter
+    // Get switch(position) in MyPagerAdapter
     public int getMood() {
         return mMood;
     }

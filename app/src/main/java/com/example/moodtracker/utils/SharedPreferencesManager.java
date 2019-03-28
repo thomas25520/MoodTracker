@@ -14,16 +14,14 @@ public class SharedPreferencesManager {
     private static SharedPreferences mPreferences;
 
     public static void putString(Context context, String key, String value) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        mPreferences.edit().putString(key, value).apply();
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).apply();
     }
 
     public static String getString(Context context, String key) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return mPreferences.getString(key, "");
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "");
     }
 
-    // Put object Mood with shared preferences
+    // Save Mood object with shared preferences
     public static void putMood(Context context, String key, Mood mood) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String json = mood.formatToJsonString();
@@ -34,6 +32,5 @@ public class SharedPreferencesManager {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         Mood mood = new Mood();
         return mood.toMood(mPreferences.getString(key, ""));
-        //return new Mood(mPreferences.getString(key,""));
     }
 }
