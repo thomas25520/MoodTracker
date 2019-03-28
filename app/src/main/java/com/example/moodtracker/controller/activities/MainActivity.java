@@ -9,6 +9,8 @@ import com.example.moodtracker.controller.adapter.MyPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
+    int mMood = 3; // Is setting on "3" for save happy_mood, when app start.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,5 +19,28 @@ public class MainActivity extends AppCompatActivity {
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
         vpPager.setCurrentItem(3); // Start fragment at (x) position
+
+        vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+            }
+
+            // TODO a utiliser pour conserver l'humeur
+            // Save the mood with getting switch(position) in MyPagerAdapter when scrolling
+            @Override
+            public void onPageSelected(int i) {
+                mMood = i;
+                System.out.println("onPageSelected " + i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+            }
+        });
+    }
+
+    // Get switch(position)  in MyPagerAdapter
+    public int getMood() {
+        return mMood;
     }
 }

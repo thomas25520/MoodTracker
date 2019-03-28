@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.example.moodtracker.model.Mood;
+
 /**
  * Created by Dutru Thomas on 20/03/2019.
  */
@@ -21,13 +23,17 @@ public class SharedPreferencesManager {
         return mPreferences.getString(key, "");
     }
 
-    public static void putInt(Context context, String key, int value) {
+    // Put object Mood with shared preferences
+    public static void putMood(Context context, String key, Mood mood) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        mPreferences.edit().putInt(key, value).apply();
+        String json = mood.formatToJsonString();
+        mPreferences.edit().putString(key, json).apply();
     }
 
-    public static int getInt(Context context, String key) {
+    public static Mood getMood(Context context, String key) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return mPreferences.getInt(key, 0);
+        Mood mood = new Mood();
+        return mood.toMood(mPreferences.getString(key, ""));
+        //return new Mood(mPreferences.getString(key,""));
     }
 }

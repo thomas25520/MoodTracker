@@ -2,30 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="#00FFFFFF"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="100"
             android:background="@color/colorPrimary"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="@string/d_7"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/j-7"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:padding="10dp"
+            android:src="@drawable/ic_comment_black_48px" />
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="#fff" />
+            android:layout_weight="0"
+            android:background="@color/warm_grey" />
 
     </LinearLayout>
 
@@ -33,24 +44,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/colorAccent"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="80"
             android:background="@color/colorAccent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="@string/d_6"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/j-6"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:padding="10dp"
+            android:src="@drawable/ic_comment_black_48px" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="#fff" />
+            android:layout_weight="20"
+            android:background="@color/warm_grey" />
 
     </LinearLayout>
 
@@ -58,24 +79,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="60"
             android:background="@color/colorPrimary"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="@string/d_5"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/j-5"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:padding="10dp"
+            android:src="@drawable/ic_comment_black_48px" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="#fff" />
+            android:layout_weight="40"
+            android:background="@color/warm_grey" />
 
     </LinearLayout>
 
@@ -83,24 +114,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/colorAccent"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="40"
             android:background="@color/colorAccent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="@string/d_4"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/j-4"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:padding="10dp"
+            android:src="@drawable/ic_comment_black_48px" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="#fff" />
+            android:layout_weight="60"
+            android:background="@color/warm_grey" />
 
     </LinearLayout>
 
@@ -108,24 +149,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="20"
             android:background="@color/colorPrimary"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="@string/d_3"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/j-3"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:padding="10dp"
+            android:src="@drawable/ic_comment_black_48px" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="#fff" />
+            android:layout_weight="80"
+            android:background="@color/warm_grey" />
 
     </LinearLayout>
 
@@ -133,24 +184,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/colorAccent"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="100"
             android:background="@color/colorAccent"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="@string/d_2"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/j-2"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:padding="10dp"
+            android:src="@drawable/ic_comment_black_48px" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="#fff" />
+            android:layout_weight="0"
+            android:background="@color/warm_grey" />
 
     </LinearLayout>
 
@@ -158,24 +219,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="100"
             android:background="@color/colorPrimary"
-            android:padding="20dp"
+            android:padding="10dp"
             android:text="@string/d_1"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/j-1"
+            android:layout_width="50dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            android:padding="10dp"
+            android:src="@drawable/ic_comment_black_48px" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:background="#fff" />
+            android:layout_weight="0"
+            android:background="@color/warm_grey" />
 
     </LinearLayout>
 
