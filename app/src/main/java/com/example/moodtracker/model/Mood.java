@@ -73,7 +73,7 @@ public class Mood {
         return gson.toJson(this);
     }
 
-    public Mood toMood(String json) {
+    public Mood jsonToMood(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Mood.class);
     }

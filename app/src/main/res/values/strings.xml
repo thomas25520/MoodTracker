@@ -1,15 +1,17 @@
 <resources>
     <string name="app_name">Moodtracker</string>
 
-    <!-- mood_view -->
+    <!-- Mood_view -->
     <string name="history_button">history_button</string>
     <string name="mood_image">mood_image</string>
     <string name="add_mood_button">add_mood_button</string>
-    <string name="d_7">Il y as sept jours</string>
-    <string name="d_6">Il y as six jours</string>
-    <string name="d_5">Il y as cinq jours</string>
-    <string name="d_4">Il y as quatre jours</string>
-    <string name="d_3">Il y as trois jours</string>
+
+    <!-- History_view -->
+    <string name="d_7">Il y a xxxxx jours</string>
+    <string name="d_6">Il y a xxxxx jours</string>
+    <string name="d_5">Il y a xxxxx jours</string>
+    <string name="d_4">Il y a xxxxx jours</string>
+    <string name="d_3">Il y a xxxxx jours</string>
     <string name="d_2">Avant hier</string>
     <string name="d_1">Hier</string>
 

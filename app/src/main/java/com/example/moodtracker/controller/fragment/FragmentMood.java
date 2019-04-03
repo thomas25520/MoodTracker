@@ -88,9 +88,24 @@ public class FragmentMood extends Fragment {
                                 String feedBack = input.getText().toString(); // Get user feedback in AlertDialog
                                 Date date = Calendar.getInstance().getTime(); // Get user feedback date
                                 mUserMood = new Mood(feedBack, date, mBackgroundColor);
+
+
+                                // PUT
+//                                String value = mUserMood.formatToJsonString();
+//                                SharedPreferencesManager.putString(getContext(), USER_MOOD_OF_THE_DAY, value);
+
                                 // SharedPreferencesManager.putString(getContext(), USER_MOOD_OF_THE_DAY, mUserMood.formatToJsonString());
                                 SharedPreferencesManager.putMood(getContext(), USER_MOOD_OF_THE_DAY, mUserMood); // Save user mood of the day in shared preferences.
-                                Mood nouveau = SharedPreferencesManager.getMood(getContext(), USER_MOOD_OF_THE_DAY);
+
+                                // ----------------------------------------------------------------------------------------------------------------------------
+
+                                // GET
+//                                String json = SharedPreferencesManager.getString(getContext(), USER_MOOD_OF_THE_DAY);
+//                                mUserMood.jsonToMood(json);
+//
+//                                mUserMood = SharedPreferencesManager.getMood(getContext(), USER_MOOD_OF_THE_DAY);
+
+
                                 Toast.makeText(getActivity(), "Humeur enregistrée", Toast.LENGTH_SHORT).show(); // Toast confirm Mood has been saved
                             }
                         });
