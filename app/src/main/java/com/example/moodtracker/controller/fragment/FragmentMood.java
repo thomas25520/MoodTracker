@@ -18,6 +18,7 @@ import com.example.moodtracker.controller.activities.HistoryActivity;
 import com.example.moodtracker.model.Mood;
 import com.example.moodtracker.utils.SharedPreferencesManager;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,8 +31,9 @@ public class FragmentMood extends Fragment {
     private int mBackgroundColor;
     private ImageView mAddMoodBtn;
     private ImageView mHistoryBtn;
+    SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
     // Keys
-    public static final String USER_MOOD_OF_THE_DAY = "moodoftheday";
+//    public static final String USER_MOOD_OF_THE_DAY = "moodoftheday";
     private Mood mUserMood;
 
     public static FragmentMood newInstance(int resImage, int backgroundColor) { // modify for backgroundcolor
@@ -95,7 +97,11 @@ public class FragmentMood extends Fragment {
 //                                SharedPreferencesManager.putString(getContext(), USER_MOOD_OF_THE_DAY, value);
 
                                 // SharedPreferencesManager.putString(getContext(), USER_MOOD_OF_THE_DAY, mUserMood.formatToJsonString());
-                                SharedPreferencesManager.putMood(getContext(), USER_MOOD_OF_THE_DAY, mUserMood); // Save user mood of the day in shared preferences.
+
+                                String todayKey = sdf.format(new Date());
+                                System.out.println(todayKey);
+
+                                SharedPreferencesManager.putMood(getContext(), todayKey, mUserMood); // Save user mood of the day in shared preferences.
 
                                 // ----------------------------------------------------------------------------------------------------------------------------
 

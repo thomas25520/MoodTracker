@@ -22,6 +22,7 @@ public class History {
      * @param listOfSortedMood List of sorted mood
      * @return List of sort mood
      */
+    // todo Algo de tri a faire
     public ArrayList sortByAcsDate(ArrayList listOfMoods, ArrayList listOfSortedMood) {
 
         return listOfSortedMood;

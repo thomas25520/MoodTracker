@@ -13,18 +13,16 @@ public class Mood {
     private Date mDate;
     private int mBackgroundColor;
 
-    // Constructor
+    // Constructors
     public Mood(String feedback, Date date, int backgroundColor) {
         mFeedback = feedback;
         mDate = date;
         mBackgroundColor = backgroundColor;
     }
 
-    // empty constructor
     public Mood() {
     }
 
-    // copy constructor
     public Mood(Mood mood) {
         this.mFeedback = mood.getFeedback();
         this.mBackgroundColor = mood.getBackgroundColor();
