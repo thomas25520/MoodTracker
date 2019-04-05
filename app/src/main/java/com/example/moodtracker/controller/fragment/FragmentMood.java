@@ -90,7 +90,7 @@ public class FragmentMood extends Fragment {
                                 String feedBack = input.getText().toString(); // Get user feedback in AlertDialog
                                 Date date = Calendar.getInstance().getTime(); // Get user feedback date
                                 mUserMood = new Mood(feedBack, date, mBackgroundColor);
-
+                                mUserMood.getPercentageSize();
 
                                 // PUT
 //                                String value = mUserMood.formatToJsonString();
