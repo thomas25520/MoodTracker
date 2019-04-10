@@ -27,7 +27,7 @@
                 android:padding="10dp"
                 android:text="@string/d_7"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,8 @@
 
             <ImageView
                 android:id="@+id/feedback_icon_day_7"
-                android:layout_width="50dp"
-                android:layout_height="54dp"
+                android:layout_width="43dp"
+                android:layout_height="47dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/ic_comment_black_48px"
@@ -71,7 +71,7 @@
                 android:padding="10dp"
                 android:text="@string/d_6"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +81,8 @@
 
             <ImageView
                 android:id="@+id/feedback_icon_day_6"
-                android:layout_width="50dp"
-                android:layout_height="54dp"
+                android:layout_width="43dp"
+                android:layout_height="47dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/ic_comment_black_48px"
@@ -117,7 +117,7 @@
                 android:padding="10dp"
                 android:text="@string/d_5"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -126,8 +126,8 @@
 
             <ImageView
                 android:id="@+id/feedback_icon_day_5"
-                android:layout_width="50dp"
-                android:layout_height="54dp"
+                android:layout_width="43dp"
+                android:layout_height="47dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/ic_comment_black_48px"
@@ -161,7 +161,7 @@
                 android:padding="10dp"
                 android:text="@string/d_4"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -170,8 +170,8 @@
 
             <ImageView
                 android:id="@+id/feedback_icon_day_4"
-                android:layout_width="50dp"
-                android:layout_height="54dp"
+                android:layout_width="43dp"
+                android:layout_height="47dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/ic_comment_black_48px"
@@ -205,7 +205,7 @@
                 android:padding="10dp"
                 android:text="@string/d_3"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -214,8 +214,8 @@
 
             <ImageView
                 android:id="@+id/feedback_icon_day_3"
-                android:layout_width="50dp"
-                android:layout_height="54dp"
+                android:layout_width="43dp"
+                android:layout_height="47dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:padding="10dp"
@@ -249,7 +249,7 @@
                 android:padding="10dp"
                 android:text="@string/d_2"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -258,8 +258,8 @@
 
             <ImageView
                 android:id="@+id/feedback_icon_day_2"
-                android:layout_width="50dp"
-                android:layout_height="54dp"
+                android:layout_width="43dp"
+                android:layout_height="47dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/ic_comment_black_48px"
@@ -293,7 +293,7 @@
                 android:padding="10dp"
                 android:text="@string/d_1"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -302,8 +302,8 @@
 
             <ImageView
                 android:id="@+id/feedback_icon_day_1"
-                android:layout_width="50dp"
-                android:layout_height="54dp"
+                android:layout_width="43dp"
+                android:layout_height="47dp"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:src="@drawable/ic_comment_black_48px"

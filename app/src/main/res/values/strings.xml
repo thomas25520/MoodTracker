@@ -7,12 +7,12 @@
     <string name="add_mood_button">add_mood_button</string>
 
     <!-- History_view -->
-    <string name="d_7">Il y a xxxx jours</string>
-    <string name="d_6">Il y a xxxx jours</string>
-    <string name="d_5">Il y a xxxx jours</string>
-    <string name="d_4">Il y a xxxx jours</string>
-    <string name="d_3">Il y a xxxx jours</string>
-    <string name="d_2">Avant hier</string>
+    <string name="d_7">Il y a une semaine</string>
+    <string name="d_6">Il y a 6 jours</string>
+    <string name="d_5">Il y a 5 jours</string>
+    <string name="d_4">Il y a 4 jours</string>
+    <string name="d_3">Il y a 3 jours</string>
+    <string name="d_2">Avant-hier</string>
     <string name="d_1">Hier</string>
 
 </resources>

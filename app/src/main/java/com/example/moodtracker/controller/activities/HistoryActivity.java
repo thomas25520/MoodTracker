@@ -8,18 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.moodtracker.R;
 import com.example.moodtracker.model.Mood;
-
-import java.util.Calendar;
 
 /**
  * Created by Dutru Thomas on 22/03/2019.
  */
 public class HistoryActivity extends AppCompatActivity {
-    // public static final String USER_MOOD_OF_THE_DAY = "03042019";
     private ImageView mFeedbackButtonDay1, mFeedbackButtonDay2, mFeedbackButtonDay3,
             mFeedbackButtonDay4, mFeedbackButtonDay5, mFeedbackButtonDay6, mFeedbackButtonDay7;
     private LinearLayout linearDay1, linearDay2, linearDay3,
@@ -36,18 +32,17 @@ public class HistoryActivity extends AppCompatActivity {
         initViews();
 
         // Test sur un mood
-        final Mood mood = new Mood("journée de test", Calendar.getInstance().getTime(), R.color.faded_red);
-        setFeedbackIconVisible(mFeedbackButtonDay7, mood);
-        setWidth(linearDay7, mood);
-        setColor(linearDay7, mood.getBackgroundColor());
-
-        // Display comment Wile click on feedback button
-        mFeedbackButtonDay7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getBaseContext(), mood.getFeedback(), Toast.LENGTH_LONG).show();
-            }
-        });
+//        final Mood mood = new Mood("journée de test", Calendar.getInstance().getTime(), R.color.faded_red);
+//        setFeedbackIconVisible(mFeedbackButtonDay7, mood);
+//        setWidth(linearDay7, mood);
+//        setColor(linearDay7, mood.getBackgroundColor());
+//        // Display comment Wile click on feedback button
+//        mFeedbackButtonDay7.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getBaseContext(), mood.getFeedback(), Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 
     @Override

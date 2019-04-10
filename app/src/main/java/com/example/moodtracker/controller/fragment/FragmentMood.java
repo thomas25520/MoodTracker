@@ -18,7 +18,6 @@ import com.example.moodtracker.controller.activities.HistoryActivity;
 import com.example.moodtracker.model.Mood;
 import com.example.moodtracker.utils.SharedPreferencesManager;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,16 +30,13 @@ public class FragmentMood extends Fragment {
     private int mBackgroundColor;
     private ImageView mAddMoodBtn;
     private ImageView mHistoryBtn;
-    SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
-    // Keys
-//    public static final String USER_MOOD_OF_THE_DAY = "moodoftheday";
     private Mood mUserMood;
 
-    public static FragmentMood newInstance(int resImage, int backgroundColor) { // modify for backgroundcolor
+    public static FragmentMood newInstance(int resImage, int backgroundColor) { // modify for backgroundColor
         FragmentMood fragment = new FragmentMood();
         Bundle args = new Bundle();
-        args.putInt("image", resImage); // mood image
-        args.putInt("backgroundColor", backgroundColor); // add background color
+        args.putInt("image", resImage); // Add mood image
+        args.putInt("backgroundColor", backgroundColor); // Add background color
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,7 +45,7 @@ public class FragmentMood extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         assert getArguments() != null;
-        mImage = getArguments().getInt("image", 0);
+        mImage = getArguments().getInt("image", 0); // Create mood image
         mBackgroundColor = getArguments().getInt("backgroundColor"); // create the background color
     }
 
@@ -59,7 +55,6 @@ public class FragmentMood extends Fragment {
         ImageView imageView = view.findViewById(R.id.fragment_mood_smiley_happy);
         imageView.setImageResource(mImage);
         view.setBackgroundResource(mBackgroundColor); // add BackgroundColor to view
-        //setBackgroundColor(getResources().getColor(mBackgroundColor)); // same to up.
 
         mAddMoodBtn = view.findViewById(R.id.fragment_mood_add_mood_button);
         mHistoryBtn = view.findViewById(R.id.fragment_mood_history_button);
@@ -89,29 +84,9 @@ public class FragmentMood extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 String feedBack = input.getText().toString(); // Get user feedback in AlertDialog
                                 Date date = Calendar.getInstance().getTime(); // Get user feedback date
-                                mUserMood = new Mood(feedBack, date, mBackgroundColor);
-                                mUserMood.getPercentageSize();
-
-                                // PUT
-//                                String value = mUserMood.formatToJsonString();
-//                                SharedPreferencesManager.putString(getContext(), USER_MOOD_OF_THE_DAY, value);
-
-                                // SharedPreferencesManager.putString(getContext(), USER_MOOD_OF_THE_DAY, mUserMood.formatToJsonString());
-
-                                String todayKey = sdf.format(new Date());
-                                System.out.println(todayKey);
-
-                                SharedPreferencesManager.putMood(getContext(), todayKey, mUserMood); // Save user mood of the day in shared preferences.
-
-                                // ----------------------------------------------------------------------------------------------------------------------------
-
-                                // GET
-//                                String json = SharedPreferencesManager.getString(getContext(), USER_MOOD_OF_THE_DAY);
-//                                mUserMood.jsonToMood(json);
-//
-//                                mUserMood = SharedPreferencesManager.getMood(getContext(), USER_MOOD_OF_THE_DAY);
-
-
+                                mUserMood = new Mood(feedBack, date, mBackgroundColor); // Create the mood
+                                mUserMood.getPercentageSize(); // Get percentage size of mood bar in function of mood
+                                SharedPreferencesManager.putMood(getContext(), "usersMoodOfTheDay", mUserMood); // Save mood of the day in shared preferences.
                                 Toast.makeText(getActivity(), "Humeur enregistrée", Toast.LENGTH_SHORT).show(); // Toast confirm Mood has been saved
                             }
                         });

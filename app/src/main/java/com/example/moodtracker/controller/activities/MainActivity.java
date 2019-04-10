@@ -3,7 +3,6 @@ package com.example.moodtracker.controller.activities;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.example.moodtracker.R;
 import com.example.moodtracker.controller.adapter.MyPagerAdapter;
@@ -16,9 +15,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-
-    //int mMood = 3; // Is setting on "3" for save happy_mood, when app start.
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,34 +24,19 @@ public class MainActivity extends AppCompatActivity {
         vpPager.setAdapter(adapterViewPager);
         vpPager.setCurrentItem(3); // Start fragment at (x) position
 
-//        vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int i, float v, int i1) {
-//            }
-//
-//            // TODO a utiliser pour conserver l'humeur
-//            // Save the mood with getting switch(position) in MyPagerAdapter when scrolling
-//            @Override
-//            public void onPageSelected(int i) {
-//                mMood = i;
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int i) {
-//            }
-//        });
+// TODO : Sauvegarder le mood a l'ouverture de l'application
 
+        if (SharedPreferencesManager.getMoodOfTheDay(this) != null) { // Verify moodOfTheDay is present
+            Mood moodOfTheDay = SharedPreferencesManager.getMoodOfTheDay(this); // Get moodOfTheDay from sharedPreferences
 
-        if (SharedPreferencesManager.getMoodOfTheDay(this) != null) {
-            // Get moodOfTheDay from sharedPreferences
-            Mood moodOfTheDay = new Mood(SharedPreferencesManager.getMoodOfTheDay(this));
-            Log.i("MOOD_DATE_BeforUpdate", " " + moodOfTheDay.getDate().toString());
-
-
-            if (needToUpdateTheHistory(moodOfTheDay) == true) { // Verify mood date with today date
-                History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get history in sharedPref and create history object
-                history.update(moodOfTheDay); // Add mood of the day to history
-                SharedPreferencesManager.putHistory(this, history); // Update history
+            if (needToUpdateTheHistory(moodOfTheDay)) { // Verify mood date with today date
+                if (SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods") != null) { // Verify history still exist
+                    History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get history in sharedPref and create history object
+                    history.update(moodOfTheDay); // Add mood of the day to history
+                    SharedPreferencesManager.putHistory(this, history); // Update history
+                } else {
+                    History history = new History();
+                }
             }
         }
     }
@@ -64,12 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean needToUpdateTheHistory(Mood moodOfTheDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = Calendar.getInstance().getTime();
-        sdf.format(currentDate);
 
-        if (moodOfTheDay.getDate() != currentDate) {
-
-            Log.i("MOOD_DATE", " " + moodOfTheDay.getDate().toString());
-            Log.i("CURRENT_DATE ", " " + currentDate);
+        if (!sdf.format(moodOfTheDay.getDate()).equals(sdf.format(currentDate))) { // Compare moodOfTheDay with current date
             return true;
 
         } else {
