@@ -9,18 +9,14 @@ import java.util.Date;
  * Created by Dutru Thomas on 26/03/2019.
  */
 public class Mood {
-
     private String mFeedback;
     private Date mDate;
     private int mBackgroundColor;
     private int mPercentageSize;
 
-    public Mood() {
-    }
-
     // copy constructor
     public Mood(Mood mood) {
-        this.mFeedback = new String(mood.getFeedback());
+        this.mFeedback = mood.getFeedback();
         this.mBackgroundColor = mood.getBackgroundColor();
         this.mDate = new Date(mood.getDate().getTime());
     }
@@ -36,7 +32,7 @@ public class Mood {
         mFeedback = feedback;
         mDate = date;
         mBackgroundColor = backgroundColor;
-        mPercentageSize = calculPercentageSize(backgroundColor);
+        mPercentageSize = calculationPercentageSize(backgroundColor);
     }
 
     // Constructors
@@ -47,19 +43,20 @@ public class Mood {
         mPercentageSize = pixelSize;
     }
 
+    // Empty constructor
+    public Mood() {
+    }
+
     // Getter
     public String getFeedback() {
         return mFeedback;
     }
-
     public Date getDate() {
         return mDate;
     }
-
     public int getBackgroundColor() {
         return mBackgroundColor;
     }
-
     public int getPercentageSize() {
         return mPercentageSize;
     }
@@ -74,17 +71,15 @@ public class Mood {
     public void setBackgroundColor(int backgroundColor) {
         mBackgroundColor = backgroundColor;
     }
-
     public void setPercentageSize(int percentageSize) {
         mPercentageSize = percentageSize;
     }
 
     /**
      * Transform mood object to Json
-     *
      * @return mood as json string
      */
-    public String formatToJsonString() {
+    public String formatToJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
@@ -94,8 +89,7 @@ public class Mood {
         return gson.fromJson(json, Mood.class);
     }
 
-    private int calculPercentageSize(int backgroundColor) {
-
+    private int calculationPercentageSize(int backgroundColor) {
         switch (backgroundColor) {
             case R.color.banana_yellow:
                 return 100;

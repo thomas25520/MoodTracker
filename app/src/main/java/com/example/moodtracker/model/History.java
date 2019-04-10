@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class History {
     private ArrayList<Mood> mListOfMoods;
 
+    // Constructor
     public History() {
     }
 
@@ -17,23 +18,30 @@ public class History {
         mListOfMoods = new ArrayList<>(listOfMoods);
     }
 
-    /**
-     * @param listOfMoods      List of saved mood
-     * @param listOfSortedMood List of sorted mood
-     * @return List of sort mood
-     */
-    // todo Algo de tri a faire
-    public ArrayList sortByAcsDate(ArrayList listOfMoods, ArrayList listOfSortedMood) {
-
-        return listOfSortedMood;
-    }
-
+    // Getter
     public ArrayList<Mood> getListOfMoods() {
         return mListOfMoods;
+    }
+
+    // Setter
+
+    // Method
+    // todo Algo de tri a faire
+//    public ArrayList sortByAcsDate(ArrayList listOfMoods, ArrayList listOfSortedMood) {
+//        return listOfSortedMood;
+//    }
+
+    public String formatToJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 
     public History jsonToHistory(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, History.class);
+    }
+
+    public void update(Mood mood) {
+        mListOfMoods.add(mood);
     }
 }

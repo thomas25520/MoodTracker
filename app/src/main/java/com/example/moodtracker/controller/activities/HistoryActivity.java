@@ -19,7 +19,7 @@ import java.util.Calendar;
  * Created by Dutru Thomas on 22/03/2019.
  */
 public class HistoryActivity extends AppCompatActivity {
-    public static final String USER_MOOD_OF_THE_DAY = "03042019";
+    // public static final String USER_MOOD_OF_THE_DAY = "03042019";
     private ImageView mFeedbackButtonDay1, mFeedbackButtonDay2, mFeedbackButtonDay3,
             mFeedbackButtonDay4, mFeedbackButtonDay5, mFeedbackButtonDay6, mFeedbackButtonDay7;
     private LinearLayout linearDay1, linearDay2, linearDay3,
@@ -35,7 +35,8 @@ public class HistoryActivity extends AppCompatActivity {
         super.onStart();
         initViews();
 
-        final Mood mood = new Mood("journée de merde", Calendar.getInstance().getTime(), R.color.faded_red);
+        // Test sur un mood
+        final Mood mood = new Mood("journée de test", Calendar.getInstance().getTime(), R.color.faded_red);
         setFeedbackIconVisible(mFeedbackButtonDay7, mood);
         setWidth(linearDay7, mood);
         setColor(linearDay7, mood.getBackgroundColor());
@@ -47,16 +48,6 @@ public class HistoryActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), mood.getFeedback(), Toast.LENGTH_LONG).show();
             }
         });
-
-//        final Mood test = new Mood();
-//        test.setFeedback("TEST");
-//        ArrayList<Mood> test2 = new ArrayList<>();
-//        test2.add(test);
-//        test2.add(test);
-//        test2.add(test);
-//        History test3 = new History(test2); // Constructor of History expected parameter is arrayList<Mood> not arrayList<History>
-//        History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods");
-//        test3.getListOfMoods();
     }
 
     @Override
@@ -74,7 +65,7 @@ public class HistoryActivity extends AppCompatActivity {
         linearDay6 = findViewById(R.id.mood_day_6);
         linearDay7 = findViewById(R.id.mood_day_7);
 
-        // Button list linked feedback comment to button
+        // Feedback button
         mFeedbackButtonDay1 = findViewById(R.id.feedback_icon_day_1);
         mFeedbackButtonDay2 = findViewById(R.id.feedback_icon_day_2);
         mFeedbackButtonDay3 = findViewById(R.id.feedback_icon_day_3);
@@ -104,7 +95,6 @@ public class HistoryActivity extends AppCompatActivity {
 
     // Return the feedback button visible or invisible
     public void setFeedbackIconVisible(ImageView feedbackButton, Mood mood) {
-
         if (mood.getFeedback().isEmpty()) {
             feedbackButton.setVisibility(View.INVISIBLE);
         } else {
