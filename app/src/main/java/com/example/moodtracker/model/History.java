@@ -12,6 +12,7 @@ public class History {
 
     // Constructor
     public History() {
+        mListOfMoods = new ArrayList<>();
     }
 
     public History(ArrayList<Mood> listOfMoods) {
