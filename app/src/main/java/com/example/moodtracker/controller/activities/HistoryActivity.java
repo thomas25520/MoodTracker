@@ -8,22 +8,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.moodtracker.R;
+import com.example.moodtracker.model.History;
 import com.example.moodtracker.model.Mood;
+import com.example.moodtracker.utils.SharedPreferencesManager;
+
+import java.util.ArrayList;
 
 /**
  * Created by Dutru Thomas on 22/03/2019.
  */
 public class HistoryActivity extends AppCompatActivity {
-    private ImageView mFeedbackButtonDay1, mFeedbackButtonDay2, mFeedbackButtonDay3,
-            mFeedbackButtonDay4, mFeedbackButtonDay5, mFeedbackButtonDay6, mFeedbackButtonDay7;
-    private LinearLayout linearDay1, linearDay2, linearDay3,
-            linearDay4, linearDay5, linearDay6, linearDay7;
+
+    private ArrayList<ImageView> mFeedbackButtonDays = new ArrayList<>(7);
+    private ArrayList<LinearLayout> mLinearDays = new ArrayList<>(7);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_view);
+    }
+
+    private void associateMood(final Mood mood, int index) {
+        LinearLayout linearLayout = mLinearDays.get(index);
+        ImageView imageView = mFeedbackButtonDays.get(index);
+        setFeedbackIconVisible(imageView, mood);
+        setWidth(linearLayout, mood);
+        setColor(linearLayout, mood.getBackgroundColor());
+        // Display comment Wile click on feedback button
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(), mood.getFeedback(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -31,18 +50,20 @@ public class HistoryActivity extends AppCompatActivity {
         super.onStart();
         initViews();
 
-        // Test sur un mood
-//        final Mood mood = new Mood("journée de test", Calendar.getInstance().getTime(), R.color.faded_red);
-//        setFeedbackIconVisible(mFeedbackButtonDay7, mood);
-//        setWidth(linearDay7, mood);
-//        setColor(linearDay7, mood.getBackgroundColor());
-//        // Display comment Wile click on feedback button
-//        mFeedbackButtonDay7.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getBaseContext(), mood.getFeedback(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+        if (SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods") == null) // Verify if history still exist
+            return;
+
+        History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get the history in sharedPref
+
+        ArrayList<Mood> listOfMoodToDisplay = history.getListOfMoods();
+
+        int index = 0;
+        for (Mood mood : listOfMoodToDisplay) {
+            if (index >= 7)
+                return;
+            associateMood(mood, index);
+            index++;
+        }
     }
 
     @Override
@@ -51,23 +72,22 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        // Linears
-        linearDay1 = findViewById(R.id.mood_day_1);
-        linearDay2 = findViewById(R.id.mood_day_2);
-        linearDay3 = findViewById(R.id.mood_day_3);
-        linearDay4 = findViewById(R.id.mood_day_4);
-        linearDay5 = findViewById(R.id.mood_day_5);
-        linearDay6 = findViewById(R.id.mood_day_6);
-        linearDay7 = findViewById(R.id.mood_day_7);
 
-        // Feedback button
-        mFeedbackButtonDay1 = findViewById(R.id.feedback_icon_day_1);
-        mFeedbackButtonDay2 = findViewById(R.id.feedback_icon_day_2);
-        mFeedbackButtonDay3 = findViewById(R.id.feedback_icon_day_3);
-        mFeedbackButtonDay4 = findViewById(R.id.feedback_icon_day_4);
-        mFeedbackButtonDay5 = findViewById(R.id.feedback_icon_day_5);
-        mFeedbackButtonDay6 = findViewById(R.id.feedback_icon_day_6);
-        mFeedbackButtonDay7 = findViewById(R.id.feedback_icon_day_7);
+        mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_1));
+        mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_2));
+        mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_3));
+        mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_4));
+        mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_5));
+        mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_6));
+        mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_7));
+
+        mFeedbackButtonDays.add((ImageView) findViewById(R.id.feedback_icon_day_1));
+        mFeedbackButtonDays.add((ImageView) findViewById(R.id.feedback_icon_day_2));
+        mFeedbackButtonDays.add((ImageView) findViewById(R.id.feedback_icon_day_3));
+        mFeedbackButtonDays.add((ImageView) findViewById(R.id.feedback_icon_day_4));
+        mFeedbackButtonDays.add((ImageView) findViewById(R.id.feedback_icon_day_5));
+        mFeedbackButtonDays.add((ImageView) findViewById(R.id.feedback_icon_day_6));
+        mFeedbackButtonDays.add((ImageView) findViewById(R.id.feedback_icon_day_7));
     }
 
     // Changes the width to the specified *pixels*
@@ -105,16 +125,3 @@ public class HistoryActivity extends AppCompatActivity {
         return size.x;
     }
 }
-//     todo : passer la list de mood enregistrée a l'historique
-//     todo : faire un algo qui calcul le nombre de jour entre la date du mood et la date actuel
-
-//        for(int i = 1; i<8; i++){
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(new Date());
-//
-//            //date = 03 avril 2019
-//            c.add(Calendar.MONTH,1);
-//            // date = 03 mai 2019
-//
-//            Mood mood = SharedPreferencesManager.getMood(this, USER_MOOD_OF_THE_DAY);
-//        }
