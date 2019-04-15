@@ -13,6 +13,7 @@ import com.example.moodtracker.utils.SharedPreferencesManager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         viewPager();
         updateToHistory();
+        checkNoMood();
         addDefaultMood();
     }
 
@@ -36,6 +38,26 @@ public class MainActivity extends AppCompatActivity {
                     history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get the history in sharedPref
                 }
                 history.update(moodOfTheDay); // Add mood of the day to history
+                SharedPreferencesManager.putHistory(this, history); // Update history
+            }
+        }
+    }
+
+    // Integrate null mood in history in function of days without connection
+    private void checkNoMood() {
+        if (SharedPreferencesManager.getMoodOfTheDay(this) != null) { // Verify moodOfTheDay is present
+            Mood moodOfTheDay = SharedPreferencesManager.getMoodOfTheDay(this); // Get moodOfTheDay from sharedPreferences
+
+            long msDiff = Calendar.getInstance().getTimeInMillis() - moodOfTheDay.getDate().getTime(); // Compare difference between mood date and system date.
+            long daysDiff = TimeUnit.MILLISECONDS.toDays(msDiff);
+            if (daysDiff == 0)
+                return;
+
+            if (SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods") != null) { // Verify if history still exist
+                History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get the history in sharedPref
+
+                while (daysDiff-- > 1)
+                    history.update(null); // Add as many moods as days without connection
                 SharedPreferencesManager.putHistory(this, history); // Update history
             }
         }
