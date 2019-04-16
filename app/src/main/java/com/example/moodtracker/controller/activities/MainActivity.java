@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             if (daysDiff == 0)
                 return;
 
-            if (SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods") != null) { // Verify if history still exist
+            if (SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods") != null) { // Verify if history already exist
                 History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get the history in sharedPref
 
                 while (daysDiff-- > 1)
@@ -72,10 +72,15 @@ public class MainActivity extends AppCompatActivity {
 
     // Set de default mood with default parameters (happy)
     private void addDefaultMood() {
-        final Mood mood = new Mood("", Calendar.getInstance().getTime(), R.color.light_sage);
-        SharedPreferencesManager.putMood(this, "usersMoodOfTheDay", mood);
-    }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = Calendar.getInstance().getTime();
 
+        // Mood should not be null and should not be have the same date like system to create a default mood
+        if ((SharedPreferencesManager.getMoodOfTheDay(this)) != null && !sdf.format(SharedPreferencesManager.getMoodOfTheDay(this).getDate()).equals(sdf.format(currentDate))) {
+            Mood mood = new Mood("", Calendar.getInstance().getTime(), R.color.light_sage);
+            SharedPreferencesManager.putMood(this, "usersMoodOfTheDay", mood);
+        }
+    }
     private void viewPager() {
         ViewPager vpPager = findViewById(R.id.vpPager);
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());

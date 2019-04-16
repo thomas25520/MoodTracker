@@ -66,10 +66,12 @@ public class HistoryActivity extends AppCompatActivity {
         History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get the history in sharedPref
         ArrayList<Mood> listOfMoodToDisplay = history.getListOfMoods();
 
+        while ((listOfMoodToDisplay.size() - 1) >= 7)
+            listOfMoodToDisplay.remove(0);
+
         int index = listOfMoodToDisplay.size() - 1;
+
         for (Mood mood : listOfMoodToDisplay) {
-            if (index >= 7)
-                return;
             if (mood != null)
                 associateMood(mood, index);
             index--;
@@ -83,7 +85,7 @@ public class HistoryActivity extends AppCompatActivity {
         setFeedbackIconVisible(imageView, mood);
         setWidth(linearLayout, mood);
         setColor(linearLayout, mood.getBackgroundColor());
-        // Display comment Wile click on feedback button
+        // Display feedback wile click on feedback button
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,8 +121,8 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 
+    // Get size of screen for adapt mood bar to all screen size
     public int getWidthSizeOfScreen() {
-        // Get size of screen
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);

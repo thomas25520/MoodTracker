@@ -14,5 +14,6 @@
     <string name="d_3">Il y a 3 jours</string>
     <string name="d_2">Avant-hier</string>
     <string name="d_1">Hier</string>
+    <string name="email_button">email_button</string>
 
 </resources>

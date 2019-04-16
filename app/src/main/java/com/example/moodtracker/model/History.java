@@ -26,12 +26,6 @@ public class History {
 
     // Setter
 
-    // Method
-    // todo Algo de tri a faire
-//    public ArrayList sortByAcsDate(ArrayList listOfMoods, ArrayList listOfSortedMood) {
-//        return listOfSortedMood;
-//    }
-
     public String formatToJson() {
         Gson gson = new Gson();
         return gson.toJson(this);

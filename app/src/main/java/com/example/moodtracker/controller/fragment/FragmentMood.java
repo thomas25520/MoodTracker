@@ -30,6 +30,7 @@ public class FragmentMood extends Fragment {
     private int mBackgroundColor;
     private ImageView mAddMoodBtn;
     private ImageView mHistoryBtn;
+    private ImageView mEmailBtn;
     private Mood mUserMood;
 
     public static FragmentMood newInstance(int resImage, int backgroundColor) { // modify for backgroundColor
@@ -58,6 +59,7 @@ public class FragmentMood extends Fragment {
 
         mAddMoodBtn = view.findViewById(R.id.fragment_mood_add_mood_button);
         mHistoryBtn = view.findViewById(R.id.fragment_mood_history_button);
+        mEmailBtn = view.findViewById(R.id.fragment_mood_email_button);
 
         saveUserFeedbackAndDate();
 
@@ -65,6 +67,18 @@ public class FragmentMood extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FragmentMood.this.getActivity(), HistoryActivity.class));
+            }
+        });
+
+        mEmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setType("text/plain");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, "yeti91750@gmail.com");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+                startActivity(Intent.createChooser(emailIntent, "Send Email"));
             }
         });
         return view;
@@ -85,7 +99,7 @@ public class FragmentMood extends Fragment {
                                 String feedBack = input.getText().toString(); // Get user feedback in AlertDialog
                                 Date date = Calendar.getInstance().getTime(); // Get user feedback date
                                 mUserMood = new Mood(feedBack, date, mBackgroundColor); // Create the mood
-                                mUserMood.getPercentageSize(); // Get percentage size of mood bar in function of mood
+                                // mUserMood.getPercentageSize(); // Get percentage size of mood bar in function of mood
                                 SharedPreferencesManager.putMood(getContext(), "usersMoodOfTheDay", mUserMood); // Save mood of the day in shared preferences.
                                 Toast.makeText(getActivity(), "Humeur enregistrée", Toast.LENGTH_SHORT).show(); // Toast confirm Mood has been saved
                             }
