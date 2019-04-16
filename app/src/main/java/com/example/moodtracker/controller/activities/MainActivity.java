@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     // Verify if is necessary to update history in function of mood date and today date
     private boolean needToUpdateTheHistory(Mood moodOfTheDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         Date currentDate = Calendar.getInstance().getTime();
         return !sdf.format(moodOfTheDay.getDate()).equals(sdf.format(currentDate)); // Compare date of moodOfTheDay with current date
     }

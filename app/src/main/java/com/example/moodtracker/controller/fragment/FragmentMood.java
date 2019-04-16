@@ -29,7 +29,6 @@ public class FragmentMood extends Fragment {
     private int mImage;
     private int mBackgroundColor;
     private ImageView mAddMoodBtn;
-    private ImageView mHistoryBtn;
     private ImageView mEmailBtn;
     private Mood mUserMood;
 
@@ -58,29 +57,19 @@ public class FragmentMood extends Fragment {
         view.setBackgroundResource(mBackgroundColor); // add BackgroundColor to view
 
         mAddMoodBtn = view.findViewById(R.id.fragment_mood_add_mood_button);
-        mHistoryBtn = view.findViewById(R.id.fragment_mood_history_button);
+        ImageView historyBtn = view.findViewById(R.id.fragment_mood_history_button);
         mEmailBtn = view.findViewById(R.id.fragment_mood_email_button);
 
         saveUserFeedbackAndDate();
+        sendMail();
 
-        mHistoryBtn.setOnClickListener(new View.OnClickListener() {
+        historyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FragmentMood.this.getActivity(), HistoryActivity.class));
             }
         });
 
-        mEmailBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                emailIntent.setType("text/plain");
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, "yeti91750@gmail.com");
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
-                startActivity(Intent.createChooser(emailIntent, "Send Email"));
-            }
-        });
         return view;
     }
 
@@ -110,5 +99,19 @@ public class FragmentMood extends Fragment {
                 alertDialog.show();
             }
         });
+    }
+
+    private void sendMail() {
+        mEmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("text/plain");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "MOODTRACKER, un ami vous envoie son humeur du jour");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, SharedPreferencesManager.getMoodOfTheDay(getContext()).getFeedback());
+                startActivity(Intent.createChooser(emailIntent, "Send Email"));
+            }
+        });
+
     }
 }
