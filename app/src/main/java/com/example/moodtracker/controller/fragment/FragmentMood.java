@@ -109,7 +109,9 @@ public class FragmentMood extends Fragment {
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
                 emailIntent.setType("text/plain");
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "MOODTRACKER, un ami vous envoie son humeur du jour");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, SharedPreferencesManager.getMoodOfTheDay(getContext()).getFeedback());
+                if (SharedPreferencesManager.getMoodOfTheDay(getContext()) != null) {
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, SharedPreferencesManager.getMoodOfTheDay(getContext()).getFeedback());
+                }
                 startActivity(Intent.createChooser(emailIntent, "Send Email"));
             }
         });
