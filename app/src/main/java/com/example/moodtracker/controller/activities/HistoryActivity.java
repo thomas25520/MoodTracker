@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.moodtracker.R;
 import com.example.moodtracker.model.History;
 import com.example.moodtracker.model.Mood;
+import com.example.moodtracker.utils.Constants;
 import com.example.moodtracker.utils.SharedPreferencesManager;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         initViews();
-        toRename();
+        displayHistory();
     }
 
     @Override
@@ -59,27 +60,28 @@ public class HistoryActivity extends AppCompatActivity {
         mFeedbackButtonDays.add((ImageView) findViewById(R.id.feedback_icon_day_7));
     }
 
-    private void toRename() { // Todo : Rename this method and comment code
-        if (SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods") == null) // Verify if history still exist
+    private void displayHistory() {
+        if (SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS) == null) // Verify if history still exist
             return;
 
-        History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get the history in sharedPref
+        History history = SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS); // Get the history in sharedPref
         ArrayList<Mood> listOfMoodToDisplay = history.getListOfMoods();
 
-        while ((listOfMoodToDisplay.size() - 1) >= 7)
+        // Clean the list if > 7
+        while ((listOfMoodToDisplay.size()) > 7)
             listOfMoodToDisplay.remove(0);
 
         int index = listOfMoodToDisplay.size() - 1;
-
+        // Chose if mood must be display
         for (Mood mood : listOfMoodToDisplay) {
             if (mood != null)
-                associateMood(mood, index);
+                associateMoodToView(mood, index);
             index--;
         }
     }
 
     // Associate moods in array list to history view
-    private void associateMood(final Mood mood, int index) {
+    private void associateMoodToView(final Mood mood, int index) {
         LinearLayout linearLayout = mLinearDays.get(index);
         ImageView imageView = mFeedbackButtonDays.get(index);
         setFeedbackIconVisible(imageView, mood);

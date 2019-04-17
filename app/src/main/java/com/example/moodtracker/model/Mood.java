@@ -15,10 +15,11 @@ public class Mood {
     private int mPercentageSize;
 
     // copy constructor
-    public Mood(Mood mood) {
+    private Mood(Mood mood) {
         this.mFeedback = mood.getFeedback();
         this.mBackgroundColor = mood.getBackgroundColor();
         this.mDate = new Date(mood.getDate().getTime());
+        this.mPercentageSize = mood.getPercentageSize();
     }
 
     // json constructor

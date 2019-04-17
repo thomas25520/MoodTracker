@@ -8,6 +8,7 @@ import com.example.moodtracker.R;
 import com.example.moodtracker.controller.adapter.MyPagerAdapter;
 import com.example.moodtracker.model.History;
 import com.example.moodtracker.model.Mood;
+import com.example.moodtracker.utils.Constants;
 import com.example.moodtracker.utils.SharedPreferencesManager;
 
 import java.text.SimpleDateFormat;
@@ -34,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
             if (needToUpdateTheHistory(moodOfTheDay)) { // Verify mood date with today date
                 History history = new History();
 
-                if (SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods") != null) { // Verify if history still exist
-                    history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get the history in sharedPref
+                if (SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS) != null) { // Verify if history still exist
+                    history = SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS); // Get the history in sharedPref
                 }
                 history.update(moodOfTheDay); // Add mood of the day to history
                 SharedPreferencesManager.putHistory(this, history); // Update history
@@ -53,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
             if (daysDiff == 0)
                 return;
 
-            if (SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods") != null) { // Verify if history already exist
-                History history = SharedPreferencesManager.getHistory(this, "historyOfTheUsersMoods"); // Get the history in sharedPref
+            if (SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS) != null) { // Verify if history already exist
+                History history = SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS); // Get the history in sharedPref
 
                 while (daysDiff-- > 1)
                     history.update(null); // Add as many moods as days without connection
@@ -66,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     // Verify if is necessary to update history in function of mood date and today date
     private boolean needToUpdateTheHistory(Mood moodOfTheDay) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
         Date currentDate = Calendar.getInstance().getTime();
         return !sdf.format(moodOfTheDay.getDate()).equals(sdf.format(currentDate)); // Compare date of moodOfTheDay with current date
     }
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         // Mood should not be null and should not be have the same date like system to create a default mood
         if ((SharedPreferencesManager.getMoodOfTheDay(this)) != null && !sdf.format(SharedPreferencesManager.getMoodOfTheDay(this).getDate()).equals(sdf.format(currentDate))) {
             Mood mood = new Mood("", Calendar.getInstance().getTime(), R.color.light_sage);
-            SharedPreferencesManager.putMood(this, "usersMoodOfTheDay", mood);
+            SharedPreferencesManager.putMood(this, Constants.USERS_MOOD_OF_THE_DAY, mood);
         }
     }
     private void viewPager() {

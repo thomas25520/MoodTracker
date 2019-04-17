@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.moodtracker.R;
 import com.example.moodtracker.controller.activities.HistoryActivity;
 import com.example.moodtracker.model.Mood;
+import com.example.moodtracker.utils.Constants;
 import com.example.moodtracker.utils.SharedPreferencesManager;
 
 import java.util.Calendar;
@@ -89,7 +90,7 @@ public class FragmentMood extends Fragment {
                                 Date date = Calendar.getInstance().getTime(); // Get user feedback date
                                 mUserMood = new Mood(feedBack, date, mBackgroundColor); // Create the mood
                                 // mUserMood.getPercentageSize(); // Get percentage size of mood bar in function of mood
-                                SharedPreferencesManager.putMood(getContext(), "usersMoodOfTheDay", mUserMood); // Save mood of the day in shared preferences.
+                                SharedPreferencesManager.putMood(getContext(), Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
                                 Toast.makeText(getActivity(), "Humeur enregistrée", Toast.LENGTH_SHORT).show(); // Toast confirm Mood has been saved
                             }
                         });
@@ -112,6 +113,5 @@ public class FragmentMood extends Fragment {
                 startActivity(Intent.createChooser(emailIntent, "Send Email"));
             }
         });
-
     }
 }

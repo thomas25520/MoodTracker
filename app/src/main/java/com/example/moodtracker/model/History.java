@@ -25,7 +25,6 @@ public class History {
     }
 
     // Setter
-
     public String formatToJson() {
         Gson gson = new Gson();
         return gson.toJson(this);

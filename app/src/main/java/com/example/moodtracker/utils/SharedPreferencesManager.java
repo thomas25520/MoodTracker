@@ -45,14 +45,14 @@ public class SharedPreferencesManager {
     public static Mood getMoodOfTheDay(Context context) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         Mood mood = new Mood();
-        return mood.jsonToMood(mPreferences.getString("usersMoodOfTheDay", ""));
+        return mood.jsonToMood(mPreferences.getString(Constants.USERS_MOOD_OF_THE_DAY, ""));
     }
 
     // Save history object in sharedPreferences
     public static void putHistory(Context context, History history) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String json = history.formatToJson();
-        mPreferences.edit().putString("historyOfTheUsersMoods", json).apply();
+        mPreferences.edit().putString(Constants.HISTORY_OF_THE_USERS_MOODS, json).apply();
     }
 
     // Save history object in sharedPreferences with choice of key
