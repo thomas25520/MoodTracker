@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Integrate null mood in history in function of days without connection
+    // Integrate default mood in history in function of days without connection
     private void checkNoMood() {
         if (SharedPreferencesManager.getMoodOfTheDay(this) != null) { // Verify moodOfTheDay is present
             Mood moodOfTheDay = SharedPreferencesManager.getMoodOfTheDay(this); // Get moodOfTheDay from sharedPreferences
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             if (SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS) != null) { // Verify if history already exist
                 History history = SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS); // Get the history in sharedPref
 
-                while (daysDiff-- > 1) // TODO passer la date de moodOfTheDay + 1 dans le while
+                while (daysDiff-- > 1)
                     history.update(new Mood("", Calendar.getInstance().getTime(), R.color.light_sage)); // Add as many moods as days without connection
                 SharedPreferencesManager.putHistory(this, history); // Update history
             }
@@ -170,21 +170,33 @@ public class MainActivity extends AppCompatActivity {
                 switch (i) {
                     case 0:
                         mBackgroundColor = R.color.faded_red;
+                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
                         break;
                     case 1:
                         mBackgroundColor = R.color.warm_grey;
+                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
                         break;
                     case 2:
                         mBackgroundColor = R.color.cornflower_blue_65;
+                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
                         break;
                     case 3:
                         mBackgroundColor = R.color.light_sage;
+                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
                         break;
                     case 4:
                         mBackgroundColor = R.color.banana_yellow;
+                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
                         break;
                     default:
                         mBackgroundColor = R.color.light_sage;
+                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
                 }
             }
 
