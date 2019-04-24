@@ -23,43 +23,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:contentDescription="@string/add_mood_button"
-        android:id="@+id/fragment_mood_add_mood_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:padding="20dp"
-        android:src="@drawable/ic_note_add_black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:contentDescription="@string/history_button"
-        android:id="@+id/fragment_mood_history_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:padding="20dp"
-        android:src="@drawable/ic_history_black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/fragment_mood_email_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/email_button"
-        android:padding="20dp"
-        android:src="@drawable/ic_email_24px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_mood_history_button"
-        app:layout_constraintStart_toEndOf="@+id/fragment_mood_add_mood_button" />
-
-
 </android.support.constraint.ConstraintLayout>

@@ -1,8 +1,15 @@
 package com.example.moodtracker.controller.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.moodtracker.R;
 import com.example.moodtracker.controller.adapter.MyPagerAdapter;
@@ -17,14 +24,82 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
+    ViewPager mVpPager;
+    ImageView mAddMoodBtn;
+    ImageView mHistoryBtn;
+    ImageView mMailBtn;
+    Mood mUserMood;
+    int mBackgroundColor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initViews();
+        setBtnClickListeners();
         viewPager();
         updateToHistory();
         checkNoMood();
         addDefaultMood();
+    }
+
+    // Initialize all view
+    private void initViews() {
+        mVpPager = findViewById(R.id.activity_main_vpPager);
+        mAddMoodBtn = findViewById(R.id.activity_main_add_mood_button);
+        mHistoryBtn = findViewById(R.id.activity_main_history_button);
+        mMailBtn = findViewById(R.id.activity_main_email_button);
+    }
+
+    // Set listener of FeedbackBtn, MailBtn, HistoryBtn.
+    private void setBtnClickListeners() {
+        // Add Feedback
+        mAddMoodBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText input = new EditText(MainActivity.this);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext()); // AlertDialog.Builder(this), "this" not work, AlertDialog.Builder would like "context", use v.getContext()
+                alertDialogBuilder.setTitle("Commentaire :")
+                        .setView(input) // Here, user can enter his feedback
+                        .setCancelable(true)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String feedBack = input.getText().toString(); // Get user feedback in AlertDialog
+                                Date date = Calendar.getInstance().getTime(); // Get user feedback date
+                                mUserMood = new Mood(feedBack, date, mBackgroundColor); // Create the mood
+                                SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
+                                Toast.makeText(MainActivity.this, "Humeur enregistrée", Toast.LENGTH_SHORT).show(); // Toast confirm Mood has been saved
+                            }
+                        });
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                // show it
+                alertDialog.show();
+            }
+        });
+
+        // Mail btn
+        mMailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("text/plain");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "MOODTRACKER, un ami vous envoie son humeur du jour");
+                if (SharedPreferencesManager.getMoodOfTheDay(MainActivity.this) != null) {
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, SharedPreferencesManager.getMoodOfTheDay(MainActivity.this).getFeedback());
+                }
+                startActivity(Intent.createChooser(emailIntent, "Send Email"));
+            }
+        });
+
+        // History btn
+        mHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+            }
+        });
     }
 
     // update the history, add the last mood save
@@ -57,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
             if (SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS) != null) { // Verify if history already exist
                 History history = SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS); // Get the history in sharedPref
 
-                while (daysDiff-- > 1)
-                    history.update(null); // Add as many moods as days without connection
+                while (daysDiff-- > 1) // TODO passer la date de moodOfTheDay + 1 dans le while
+                    history.update(new Mood("", Calendar.getInstance().getTime(), R.color.light_sage)); // Add as many moods as days without connection
                 SharedPreferencesManager.putHistory(this, history); // Update history
             }
         }
@@ -83,9 +158,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void viewPager() {
-        ViewPager vpPager = findViewById(R.id.vpPager);
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-        vpPager.setAdapter(adapterViewPager);
-        vpPager.setCurrentItem(3); // Start fragment at (x) position
+        mVpPager.setAdapter(adapterViewPager);
+        mVpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                switch (i) {
+                    case 0:
+                        mBackgroundColor = R.color.faded_red;
+                        break;
+                    case 1:
+                        mBackgroundColor = R.color.warm_grey;
+                        break;
+                    case 2:
+                        mBackgroundColor = R.color.cornflower_blue_65;
+                        break;
+                    case 3:
+                        mBackgroundColor = R.color.light_sage;
+                        break;
+                    case 4:
+                        mBackgroundColor = R.color.banana_yellow;
+                        break;
+                    default:
+                        mBackgroundColor = R.color.light_sage;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+            }
+        });
+        mVpPager.setCurrentItem(3); // Start fragment at (x) position
     }
 }

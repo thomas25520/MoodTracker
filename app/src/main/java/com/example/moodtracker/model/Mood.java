@@ -90,6 +90,7 @@ public class Mood {
         return gson.fromJson(json, Mood.class);
     }
 
+    // Return size of mood bar in function of mood color
     private int calculationPercentageSize(int backgroundColor) {
         switch (backgroundColor) {
             case R.color.banana_yellow:

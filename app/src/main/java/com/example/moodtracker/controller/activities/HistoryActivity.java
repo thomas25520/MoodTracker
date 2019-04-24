@@ -37,11 +37,6 @@ public class HistoryActivity extends AppCompatActivity {
         displayHistory();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     private void initViews() {
         mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_1));
         mLinearDays.add((LinearLayout) findViewById(R.id.mood_day_2));

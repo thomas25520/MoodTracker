@@ -11,7 +11,6 @@ import com.example.moodtracker.controller.fragment.FragmentMood;
  * Created by Dutru Thomas on 13/03/2019.
  */
 public class MyPagerAdapter extends FragmentPagerAdapter {
-    private static int NUM_ITEMS = 5;
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -20,7 +19,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     // Returns total number of pages.
     @Override
     public int getCount() {
-        return NUM_ITEMS;
+        return 5;
     }
 
     // Returns the fragment to display for a particular page.
