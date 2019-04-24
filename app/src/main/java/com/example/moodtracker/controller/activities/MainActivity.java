@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 final EditText input = new EditText(MainActivity.this);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext()); // AlertDialog.Builder(this), "this" not work, AlertDialog.Builder would like "context", use v.getContext()
                 alertDialogBuilder.setTitle("Commentaire :")
-                        .setView(input) // Here, user can enter his feedback
+                        .setView(input) // Here, user can enter his feedback // todo rapeller le feedback a l'utilisateur
                         .setCancelable(true)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
     private void viewPager() {
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mVpPager.setAdapter(adapterViewPager);
+        mVpPager.setCurrentItem(3); // Start fragment at (x) position
         mVpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -170,33 +171,33 @@ public class MainActivity extends AppCompatActivity {
                 switch (i) {
                     case 0:
                         mBackgroundColor = R.color.faded_red;
-                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
+                        Mood mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
                         break;
                     case 1:
                         mBackgroundColor = R.color.warm_grey;
-                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
+                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
                         break;
                     case 2:
                         mBackgroundColor = R.color.cornflower_blue_65;
-                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
+                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
                         break;
                     case 3:
                         mBackgroundColor = R.color.light_sage;
-                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
+                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
                         break;
                     case 4:
                         mBackgroundColor = R.color.banana_yellow;
-                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
+                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
                         break;
                     default:
                         mBackgroundColor = R.color.light_sage;
-                        mUserMood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mUserMood); // Save mood of the day in shared preferences.
+                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
+                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
                 }
             }
 
@@ -204,6 +205,5 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int i) {
             }
         });
-        mVpPager.setCurrentItem(3); // Start fragment at (x) position
     }
 }

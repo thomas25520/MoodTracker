@@ -35,6 +35,7 @@ public class HistoryActivity extends AppCompatActivity {
         super.onStart();
         initViews();
         displayHistory();
+
     }
 
     private void initViews() {
@@ -56,8 +57,10 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void displayHistory() {
-        if (SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS) == null) // Verify if history still exist
+        if (SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS) == null) {  // Verify if history still exist
+            Toast.makeText(this, "Pas d'historique revenez demain :)", Toast.LENGTH_LONG).show(); // Toast confirm Mood has been saved
             return;
+        }
 
         History history = SharedPreferencesManager.getHistory(this, Constants.HISTORY_OF_THE_USERS_MOODS); // Get the history in sharedPref
         ArrayList<Mood> listOfMoodToDisplay = history.getListOfMoods();
