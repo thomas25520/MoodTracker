@@ -69,4 +69,16 @@ public class SharedPreferencesManager {
         String json = mPreferences.getString(key, "");
         return history.jsonToHistory(json);
     }
+
+    // Save position when scrolling
+    public static void savedScrollPosition(Context context, int position) {
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        mPreferences.edit().putInt(Constants.SCROLLED_POSITION, position).apply();
+    }
+
+    // Get scrolled position
+    public static int getScrolledPosition(Context context) {
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return mPreferences.getInt(Constants.SCROLLED_POSITION, 0);
+    }
 }

@@ -37,15 +37,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
         setBtnClickListeners();
-        viewPager();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         updateToHistory();
         checkNoMood();
         addDefaultMood();
+        viewPager();
     }
 
     // Initialize all view
@@ -160,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         if ((SharedPreferencesManager.getMoodOfTheDay(this)) != null && !sdf.format(SharedPreferencesManager.getMoodOfTheDay(this).getDate()).equals(sdf.format(currentDate))) {
             Mood mood = new Mood("", Calendar.getInstance().getTime(), R.color.light_sage);
             SharedPreferencesManager.putMood(this, Constants.USERS_MOOD_OF_THE_DAY, mood);
+            SharedPreferencesManager.savedScrollPosition(this, 3); // Set position 3 (happy) in scrolled view when day change
         }
     }
 
@@ -171,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     private void viewPager() {
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mVpPager.setAdapter(adapterViewPager);
-        mVpPager.setCurrentItem(3); // Start fragment at (x) position
+        mVpPager.setCurrentItem(SharedPreferencesManager.getScrolledPosition(this)); // Start fragment at (x) position
         mVpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -183,26 +179,32 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         mBackgroundColor = R.color.faded_red; // Set color when scrolling
                         saveMoodWhenScrolling(); // Create mood and save it on sharedPreferences
+                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     case 1:
                         mBackgroundColor = R.color.warm_grey;
                         saveMoodWhenScrolling();
+                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     case 2:
                         mBackgroundColor = R.color.cornflower_blue_65;
                         saveMoodWhenScrolling();
+                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     case 3:
                         mBackgroundColor = R.color.light_sage;
                         saveMoodWhenScrolling();
+                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     case 4:
                         mBackgroundColor = R.color.banana_yellow;
                         saveMoodWhenScrolling();
+                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     default:
                         mBackgroundColor = R.color.light_sage;
                         saveMoodWhenScrolling();
+                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                 }
             }
 
