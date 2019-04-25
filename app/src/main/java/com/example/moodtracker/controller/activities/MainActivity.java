@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         setBtnClickListeners();
         viewPager();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         updateToHistory();
         checkNoMood();
         addDefaultMood();
@@ -157,6 +162,12 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferencesManager.putMood(this, Constants.USERS_MOOD_OF_THE_DAY, mood);
         }
     }
+
+    private void saveMoodWhenScrolling() {
+        Mood mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create mood
+        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+    }
+
     private void viewPager() {
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mVpPager.setAdapter(adapterViewPager);
@@ -170,34 +181,28 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int i) {
                 switch (i) {
                     case 0:
-                        mBackgroundColor = R.color.faded_red;
-                        Mood mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+                        mBackgroundColor = R.color.faded_red; // Set color when scrolling
+                        saveMoodWhenScrolling(); // Create mood and save it on sharedPreferences
                         break;
                     case 1:
                         mBackgroundColor = R.color.warm_grey;
-                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+                        saveMoodWhenScrolling();
                         break;
                     case 2:
                         mBackgroundColor = R.color.cornflower_blue_65;
-                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+                        saveMoodWhenScrolling();
                         break;
                     case 3:
                         mBackgroundColor = R.color.light_sage;
-                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+                        saveMoodWhenScrolling();
                         break;
                     case 4:
                         mBackgroundColor = R.color.banana_yellow;
-                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+                        saveMoodWhenScrolling();
                         break;
                     default:
                         mBackgroundColor = R.color.light_sage;
-                        mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create the mood while scrolling
-                        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+                        saveMoodWhenScrolling();
                 }
             }
 
