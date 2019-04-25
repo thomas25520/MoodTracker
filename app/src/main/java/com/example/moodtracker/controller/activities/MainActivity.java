@@ -36,11 +36,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        setBtnClickListeners();
-        updateToHistory();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         checkNoMood();
+        updateToHistory();
         addDefaultMood();
         viewPager();
+        setBtnClickListeners();
     }
 
     // Initialize all view
@@ -58,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final EditText input = new EditText(MainActivity.this);
+                input.setText(SharedPreferencesManager.getMoodOfTheDay(v.getContext()).getFeedback());
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext()); // AlertDialog.Builder(this), "this" not work, AlertDialog.Builder would like "context", use v.getContext()
                 alertDialogBuilder.setTitle("Commentaire :")
-                        .setView(input) // Here, user can enter his feedback // todo rapeller le feedback a l'utilisateur
+                        .setView(input) // Here, user can enter his feedback //
                         .setCancelable(true)
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
@@ -167,6 +173,9 @@ public class MainActivity extends AppCompatActivity {
     private void viewPager() {
         MyPagerAdapter adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mVpPager.setAdapter(adapterViewPager);
+        if (SharedPreferencesManager.getMoodOfTheDay(getBaseContext()) == null) {
+            SharedPreferencesManager.savedScrollPosition(this, 3); // Set position 3 (happy) if this is the first app launch
+        }
         mVpPager.setCurrentItem(SharedPreferencesManager.getScrolledPosition(this)); // Start fragment at (x) position
         mVpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -178,34 +187,24 @@ public class MainActivity extends AppCompatActivity {
                 switch (i) {
                     case 0:
                         mBackgroundColor = R.color.faded_red; // Set color when scrolling
-                        saveMoodWhenScrolling(); // Create mood and save it on sharedPreferences
-                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     case 1:
                         mBackgroundColor = R.color.warm_grey;
-                        saveMoodWhenScrolling();
-                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     case 2:
                         mBackgroundColor = R.color.cornflower_blue_65;
-                        saveMoodWhenScrolling();
-                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     case 3:
                         mBackgroundColor = R.color.light_sage;
-                        saveMoodWhenScrolling();
-                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     case 4:
                         mBackgroundColor = R.color.banana_yellow;
-                        saveMoodWhenScrolling();
-                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                         break;
                     default:
                         mBackgroundColor = R.color.light_sage;
-                        saveMoodWhenScrolling();
-                        SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
                 }
+                saveMoodWhenScrolling(); // Create mood and save it on sharedPreferences
+                SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
             }
 
             @Override
