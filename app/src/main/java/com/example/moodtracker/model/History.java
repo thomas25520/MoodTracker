@@ -21,6 +21,8 @@ public class History {
 
     // Getter
     public ArrayList<Mood> getListOfMoods() {
+        while ((mListOfMoods.size()) > 7) // Clean list > 7 mood to optimize
+            mListOfMoods.remove(0);
         return mListOfMoods;
     }
 
