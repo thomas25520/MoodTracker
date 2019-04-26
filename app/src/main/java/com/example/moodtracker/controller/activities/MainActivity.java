@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView mHistoryBtn;
     ImageView mMailBtn;
     Mood mUserMood;
-    int mBackgroundColor;
+    int mBackgroundColor = R.color.light_sage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveMoodWhenScrolling() {
-        Mood mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create mood
+        Mood mood = new Mood(SharedPreferencesManager.getMoodOfTheDay(getBaseContext()).getFeedback(), Calendar.getInstance().getTime(), mBackgroundColor); // Create mood
         SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
     }
 
