@@ -20,9 +20,12 @@ public class History {
     }
 
     // Getter
+
+    /**
+     * @return the last seven days
+     */
     public ArrayList<Mood> getListOfMoods() {
-        while ((mListOfMoods.size()) > 7) // Clean list > 7 mood to optimize
-            mListOfMoods.remove(0);
+        getLastSevenMoods();
         return mListOfMoods;
     }
 
@@ -39,5 +42,11 @@ public class History {
 
     public void update(Mood mood) {
         mListOfMoods.add(mood);
+    }
+
+    private ArrayList<Mood> getLastSevenMoods() {
+        while ((mListOfMoods.size()) > 7) // Clean list > 7 mood to optimize
+            mListOfMoods.remove(0);
+        return mListOfMoods;
     }
 }

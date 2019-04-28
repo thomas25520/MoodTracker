@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        checkNoMood();
         updateToHistory();
+        checkNoMood();
         addDefaultMood();
         viewPager();
         setBtnClickListeners();
