@@ -63,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final EditText input = new EditText(MainActivity.this);
-                input.setText(SharedPreferencesManager.getMoodOfTheDay(v.getContext()).getFeedback());
+                if (SharedPreferencesManager.getMoodOfTheDay(getBaseContext()) != null) {
+                    input.setText(SharedPreferencesManager.getMoodOfTheDay(v.getContext()).getFeedback());
+                }
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext()); // AlertDialog.Builder(this), "this" not work, AlertDialog.Builder would like "context", use v.getContext()
                 alertDialogBuilder.setTitle("Commentaire :")
                         .setView(input) // Here, user can enter his feedback //
@@ -166,8 +168,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveMoodWhenScrolling() {
-        Mood mood = new Mood(SharedPreferencesManager.getMoodOfTheDay(getBaseContext()).getFeedback(), Calendar.getInstance().getTime(), mBackgroundColor); // Create mood
-        SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+        if (SharedPreferencesManager.getMoodOfTheDay(getBaseContext()) != null) {
+            Mood mood = new Mood(SharedPreferencesManager.getMoodOfTheDay(getBaseContext()).getFeedback(), Calendar.getInstance().getTime(), mBackgroundColor); // Create mood
+            SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+        } else {
+            Mood mood = new Mood("", Calendar.getInstance().getTime(), mBackgroundColor); // Create mood
+            SharedPreferencesManager.putMood(MainActivity.this, Constants.USERS_MOOD_OF_THE_DAY, mood); // Save mood of the day in shared preferences.
+        }
     }
 
     private void viewPager() {
