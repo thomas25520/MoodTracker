@@ -79,16 +79,16 @@ public class HistoryActivity extends AppCompatActivity {
 
     // Associate moods in array list to history view
     private void associateMoodToView(final Mood mood, int index) {
-        LinearLayout linearLayout = mLinearDays.get(index);
-        ImageView imageView = mFeedbackButtonDays.get(index);
-        setFeedbackIconVisible(imageView, mood);
-        setWidth(linearLayout, mood);
-        setColor(linearLayout, mood.getBackgroundColor());
+        LinearLayout linearLayout = mLinearDays.get(index); // MoodBar
+        ImageView imageView = mFeedbackButtonDays.get(index); // Feedback button
+        setFeedbackIconVisible(imageView, mood); // Display Feedback button or not
+        setWidth(linearLayout, mood); // with of moodbar
+        setColor(linearLayout, mood.getBackgroundColor()); // Color of moodbar
         // Display feedback wile click on feedback button
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), mood.getFeedback(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), mood.getFeedback(), Toast.LENGTH_LONG).show(); // Button display feedback
             }
         });
     }
