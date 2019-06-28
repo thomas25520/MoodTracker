@@ -191,25 +191,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int i) {
-                switch (i) {
-                    case 0:
-                        mBackgroundColor = R.color.faded_red; // Set color when scrolling
-                        break;
-                    case 1:
-                        mBackgroundColor = R.color.warm_grey;
-                        break;
-                    case 2:
-                        mBackgroundColor = R.color.cornflower_blue_65;
-                        break;
-                    case 3:
-                        mBackgroundColor = R.color.light_sage;
-                        break;
-                    case 4:
-                        mBackgroundColor = R.color.banana_yellow;
-                        break;
-                    default:
-                        mBackgroundColor = R.color.light_sage;
-                }
                 saveMoodWhenScrolling(); // Create mood and save it on sharedPreferences
                 SharedPreferencesManager.savedScrollPosition(getBaseContext(), i);
             }
